@@ -16,6 +16,8 @@ import CartComponent from './components/Cart';
 import NotFoundComponent from './components/NotFound';
 import { CartProvider } from './contexts/CartContext';
 
+
+
 function App() {
   return (
     <AuthContext.Provider value={value}>
