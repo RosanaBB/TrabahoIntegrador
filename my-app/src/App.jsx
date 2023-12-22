@@ -16,6 +16,8 @@ import CartComponent from './components/Cart';
 import NotFoundComponent from './components/NotFound';
 import { CartProvider } from './contexts/CartContext';
 
+
+
 function App() {
   return (
     <AuthContext.Provider value={value}>
@@ -57,5 +59,66 @@ function App() {
     </AuthContext.Provider>
   );
 }
+
+function Layout() {
+  return (
+    <div className="Links">
+      <nav>
+        <li>
+          <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/products"
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            Products
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/categories"
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            Categories
+          </Link>
+        </li>
+        <li>
+          <Link to="/login" style={{ textDecoration: 'none', color: 'white' }}>
+            Login
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/register"
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            Register
+          </Link>
+        </li>
+      </nav>
+
+      <Outlet />
+    </div>
+  );
+}
+
+function AdminRoutes({ children }) {
+  const currentLocation = useLocation();
+  const { id } = useContext(AuthContext);
+
+  if (!id) {
+    return <Navigate to="/login" state={{ from: currentLocation }} replace />;
+  }
+
+  return children;
+}
+
+
+const container = document.querySelector('#app');
+const root = createRoot(container);
+root.render(<App />);
 
 export default App;
